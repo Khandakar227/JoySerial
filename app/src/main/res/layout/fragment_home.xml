@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="100dp"
+    tools:context=".ui.home.HomeFragment">
+
+    <Button
+        android:id="@+id/pause_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="2dp"
+        android:text="@string/pause"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toTopOf="@id/RJoystick"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.7"
+        app:layout_constraintStart_toEndOf="@id/LJoystick"
+        app:layout_constraintTop_toBottomOf="@+id/guideline2" />
+
+    <io.github.controlwear.virtual.joystick.android.JoystickView
+        android:id="@+id/LJoystick"
+        android:layout_width="200dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="20dp"
+        app:JV_backgroundColor="@color/onyx"
+        app:JV_backgroundSizeRatio="50%"
+        app:JV_borderColor="@color/raisin_black"
+        app:JV_borderWidth="2dp"
+        app:JV_buttonColor="@color/raisin_black"
+        app:JV_buttonSizeRatio="45%"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline2" />
+
+    <io.github.controlwear.virtual.joystick.android.JoystickView
+        android:id="@+id/RJoystick"
+        android:layout_width="235dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="124dp"
+        app:JV_backgroundColor="@color/onyx"
+        app:JV_backgroundSizeRatio="50%"
+        app:JV_borderColor="@color/raisin_black"
+        app:JV_borderWidth="2dp"
+        app:JV_buttonColor="@color/raisin_black"
+        app:JV_buttonSizeRatio="45%"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_percent="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.7" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.29" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout3"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.88"
+        app:layout_constraintStart_toStartOf="@+id/guideline1"
+        app:layout_constraintTop_toTopOf="@+id/guideline2">
+
+        <Button
+            android:id="@+id/Y"
+            android:layout_width="40dp"
+            android:layout_height="48dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:backgroundTint="@color/raisin_black"
+            android:padding="0dp"
+            android:text="@string/Y"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/X"
+            android:layout_width="40dp"
+            android:layout_height="48dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:backgroundTint="@color/raisin_black"
+            android:padding="0dp"
+            android:text="@string/X"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/B"
+            android:layout_width="40dp"
+            android:layout_height="48dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:backgroundTint="@color/raisin_black"
+            android:padding="0dp"
+            android:text="@string/B"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/A"
+            android:layout_width="40dp"
+            android:layout_height="48dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:backgroundTint="@color/raisin_black"
+            android:padding="0dp"
+            android:text="@string/A"
+            android:textSize="24sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/RJoystick"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
+        app:layout_constraintVertical_bias="0.798">
+
+        <ImageButton
+            android:id="@+id/Up"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/image_button_pressed"
+            android:contentDescription="@string/UP"
+            android:padding="0dp"
+            android:src="@drawable/ic_up_arrow_foreground" />
+
+        <ImageButton
+            android:id="@+id/Left"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/image_button_pressed"
+            android:contentDescription="@string/LEFT"
+            android:padding="0dp"
+            android:src="@drawable/ic_left_arrow_foreground" />
+
+        <ImageButton
+            android:id="@+id/Right"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/image_button_pressed"
+            android:contentDescription="@string/RIGHT"
+            android:padding="0dp"
+            android:src="@drawable/ic_right_arrow_foreground" />
+
+        <ImageButton
+            android:id="@+id/Down"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/image_button_pressed"
+            android:contentDescription="@string/DOWN"
+            android:padding="0dp"
+            android:src="@drawable/ic_down_arrow_foreground" />
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
