@@ -35,14 +35,12 @@ public class HomeFragment extends Fragment implements View.OnTouchListener {
     private FragmentHomeBinding binding;
     private  Gamepad gamepadData;
     private UsbService usbService;
-    private UsbHandler mHandler;
     private Thread dataThread;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        mHandler = new UsbHandler((MainActivity) getContext());
         gamepadData = Gamepad.getInstance();
 
         initializeControls();
@@ -139,8 +137,7 @@ public class HomeFragment extends Fragment implements View.OnTouchListener {
         @Override
         public void onServiceConnected(ComponentName arg0, IBinder arg1) {
             usbService = ((UsbService.UsbBinder) arg1).getService();
-            usbService.setHandler(mHandler);
-        }
+         }
 
         @Override
         public void onServiceDisconnected(ComponentName arg0) {
@@ -163,7 +160,6 @@ public class HomeFragment extends Fragment implements View.OnTouchListener {
     public void onResume() {
         super.onResume();
         setFilters();
-
     }
 
     @Override
@@ -184,28 +180,6 @@ public class HomeFragment extends Fragment implements View.OnTouchListener {
         Intent bindingIntent = new Intent(ctx, UsbService.class);
         if(ctx != null)
             ctx.bindService(bindingIntent, serviceConnection, Context.BIND_AUTO_CREATE);
-    }
-    private static class UsbHandler extends Handler {
-        private final WeakReference<MainActivity> mActivity;
-        public UsbHandler(MainActivity activity) {
-            mActivity = new WeakReference<>(activity);
-        }
-
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case UsbService.MESSAGE_FROM_SERIAL_PORT:
-                    String data = (String) msg.obj;
-                    System.out.println(data);
-                    break;
-                case UsbService.CTS_CHANGE:
-                    Toast.makeText(mActivity.get(), "CTS_CHANGE",Toast.LENGTH_LONG).show();
-                    break;
-                case UsbService.DSR_CHANGE:
-                    Toast.makeText(mActivity.get(), "DSR_CHANGE",Toast.LENGTH_LONG).show();
-                    break;
-            }
-        }
     }
 
     private class DataThread extends Thread {

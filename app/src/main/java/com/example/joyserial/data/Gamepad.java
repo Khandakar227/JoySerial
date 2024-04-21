@@ -8,8 +8,9 @@ public class Gamepad {
     public int MAX_THETA = 255;
     public int MAX_RADIUS = 255;
     public char END_DELIMITER = '>';
+    public char START_DELIMITER = '<';
     private boolean A, B, X, Y, pause;
-    private int hat;
+    private int hat, baseRotation, pillar, primary, secondary, wrist, gripper;
     private PolarCord rthumb, lthumb;
     private static Gamepad instance;
     private Gamepad() {
@@ -22,6 +23,13 @@ public class Gamepad {
 
         this.rthumb = new PolarCord(0,0);
         this.lthumb = new PolarCord(0, 0);
+
+        this.baseRotation = 126;
+        this.pillar = 126;
+        this.primary = 126;
+        this.secondary = 126;
+        this.wrist = 126;
+        this.gripper = 126;
     }
 
     public static synchronized Gamepad getInstance() {
@@ -75,6 +83,12 @@ public class Gamepad {
         this.lthumb.radius = radius * MAX_RADIUS/100;
         this.lthumb.theta = theta * MAX_THETA/360;
     }
+    public void baseRotation(int v) { this.baseRotation = v;}
+    public void pillar(int v) { this.pillar = v;}
+    public void primary(int v) { this.primary = v;}
+    public void secondary(int v) { this.secondary = v;}
+    public void wrist(int v) { this.wrist = v;}
+    public void gripper(int v) { this.gripper = v;}
     @NonNull
     @Override
     public synchronized String toString() {
@@ -83,23 +97,32 @@ public class Gamepad {
                 +", LeftThumb:" + this.lthumb.radius + " " + this.lthumb.theta;
     }
     public synchronized byte[] toByteArray() {
-        byte[] data = new byte[10];
-        data[0] = (byte) (this.A ? 1 : 0);
-        data[1] = (byte) (this.B ? 1 : 0);
-        data[2] = (byte) (this.X ? 1 : 0);
-        data[3] = (byte) (this.Y ? 1 : 0);
-        data[4] = (byte) this.hat;
-        data[5] = escapeDelimiter(this.rthumb.radius);
+        byte[] data = new byte[17];
+        data[0] = (byte) '<';
+        data[1] = (byte) (this.A ? 1 : 0);
+        data[2] = (byte) (this.B ? 1 : 0);
+        data[3] = (byte) (this.X ? 1 : 0);
+        data[4] = (byte) (this.Y ? 1 : 0);
+        data[5] = (byte) this.hat;
+        data[6] = escapeDelimiter(this.rthumb.radius);
         int rightTheta = this.rthumb.theta;
-        data[6] = escapeDelimiter(rightTheta);
-        data[7] = escapeDelimiter(this.lthumb.radius);
+        data[7] = escapeDelimiter(rightTheta);
+        data[8] = escapeDelimiter(this.lthumb.radius);
         int leftTheta = this.lthumb.theta;
-        data[8] = escapeDelimiter(leftTheta);
-        data[9] = (byte) '<';
+        data[9] = escapeDelimiter(leftTheta);
+
+        data[10] = escapeDelimiter(this.baseRotation);
+        data[11] = escapeDelimiter(this.pillar);
+        data[12] = escapeDelimiter(this.primary);
+        data[13] = escapeDelimiter(this.secondary);
+        data[14] = escapeDelimiter(this.gripper);
+        data[15] = escapeDelimiter(this.wrist);
+
+        data[16] = (byte) '>';
 
         return data;
     }
     private byte escapeDelimiter(int val) {
-        return (byte) ((char) val == END_DELIMITER ? val+1: val);
+        return (byte) ((char) val == END_DELIMITER || val == START_DELIMITER ? val+1: val);
     }
 }

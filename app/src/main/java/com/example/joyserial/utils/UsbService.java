@@ -213,7 +213,6 @@ public class UsbService extends Service implements SharedPreferences.OnSharedPre
                 device = entry.getValue();
                 int deviceVID = device.getVendorId();
                 int devicePID = device.getProductId();
-
 //                if (deviceVID != 0x1d6b && (devicePID != 0x0001 && devicePID != 0x0002 && devicePID != 0x0003) && deviceVID != 0x5c6 && devicePID != 0x904c) {
                 if (UsbSerialDevice.isSupported(device)) {
                     // There is a supported device connected - request permission to access it.
